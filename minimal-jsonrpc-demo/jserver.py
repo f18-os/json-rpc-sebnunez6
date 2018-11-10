@@ -13,14 +13,15 @@ from bsonrpc.framing import (
 @service_class
 class ServerServices(object):
 
-  @request
-  def swapper(self, txt):
-    return ''.join(reversed(list(txt)))
+    @request
+    def swapper(self, txt):
+        return ''.join(list(txt))
 
-  @request
-  def nop(self, txt):
-    print(txt)
-    return txt
+    @request
+    def nop(self, txt):
+        print(txt)
+        return txt
+
 
 # Quick-and-dirty TCP Server:
 ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -28,6 +29,6 @@ ss.bind(('localhost', 50001))
 ss.listen(10)
 
 while True:
-  s, _ = ss.accept()
-  # JSONRpc object spawns internal thread to serve the connection.
-  JSONRpc(s, ServerServices(),framing_cls=JSONFramingNone)
+    s, _ = ss.accept()
+    # JSONRpc object spawns internal thread to serve the connection.
+    JSONRpc(s, ServerServices(),framing_cls=JSONFramingNone)
