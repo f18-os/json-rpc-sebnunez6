@@ -12,6 +12,7 @@ def increment(graph):
     graph.val += 1;
     for c in graph.children:
         increment(c)
+        
 def listToDict(graph, dict = {}):
     dict.update({str(graph.name): graph.val})
     for c in graph.children:

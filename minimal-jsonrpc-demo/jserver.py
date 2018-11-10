@@ -20,7 +20,7 @@ class ServerServices(object):
         
     @request
     def nop(self, txt):
-        string = json.dumps(txt)
+        string = json.dumps(txt, indent=4, separators=(". ", " = "))
         filewriter = open("request.json","w")
         filewriter.write(string)
         filewriter.close()
