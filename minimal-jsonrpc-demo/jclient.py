@@ -25,7 +25,7 @@ increment(root)
 print("graph after increment")
 root.show()
 print("dictionary")
-print(listToDict(root))
+dict = listToDict(root)
 
 # Cut-the-corners TCP Client:
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -38,7 +38,7 @@ result = server.swapper('Hello World!')
 # "!dlroW olleH"
 print(result)
 
-print(server.nop({1:[2,3]}))
+print(server.nop(dict))
 
 rpc.close() # Closes the socket 's' also
 

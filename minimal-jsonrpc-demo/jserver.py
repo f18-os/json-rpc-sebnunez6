@@ -4,6 +4,7 @@
 import socket
 from bsonrpc import JSONRpc
 from bsonrpc import request, service_class
+import json
 from bsonrpc.exceptions import FramingError
 from bsonrpc.framing import (
 	JSONFramingNetstring, JSONFramingNone, JSONFramingRFC7464)
@@ -16,10 +17,13 @@ class ServerServices(object):
     @request
     def swapper(self, txt):
         return ''.join(list(txt))
-
+        
     @request
     def nop(self, txt):
-        print(txt)
+        string = json.dumps(txt)
+        filewriter = open("request.json","w")
+        filewriter.write(string)
+        filewriter.close()
         return txt
 
 
