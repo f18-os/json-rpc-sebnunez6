@@ -20,12 +20,18 @@ class ServerServices(object):
         return ''.join(list(txt))
         
     @request
-    def nop(self, txt):
+    def increment(self, txt):
+        print("---------------------------received--------------------------------------")
+        print(txt)
         root = ListDictToTree("root",txt) #returns it back into a tree
         increment(root)                   #increments tree
+        print("\nTree created:\n")
         root.show()                       #prints results
-        txt = TreeToListDict(root)
-        return txt
+        print("--------------------------sending---------------------------------------")
+        list = TreeToListDict(root)
+        print(list)
+        print("\n\n")
+        return list
 
 
 # Quick-and-dirty TCP Server:

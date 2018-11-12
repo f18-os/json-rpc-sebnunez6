@@ -15,9 +15,16 @@ def increment(graph):#call this method in the server
         
 def TreeToListDict(graph, list=[]): #tree to list of dictionaries #each dictionary is an object
     #creates dictionary of current node
-    list.append({"name":  graph.name, "children": [str(child.name)for child in graph.children], "value": graph.val})
-    for c in graph.children: #creates 
-        list = TreeToListDict(c,list)
+    repetition = False
+    for element in list:
+        if graph.name in element["name"]: #if there is a repetition updates the repition
+            element["children"]=[str(child.name)for child in graph.children]
+            element["value"] = graph.val
+            repetition = True
+    if not repetition: #if there is no repetition appends new node to the list
+        list.append({"name":  graph.name, "children": [str(child.name)for child in graph.children], "value": graph.val})
+    for c in graph.children: #creates children recursively
+        TreeToListDict(c,list)
     return list
 
 def ListDictToTree(curr = "root",listDict=[]):#converts List of dictionaries into a tree recursively
@@ -30,7 +37,6 @@ def ListDictToTree(curr = "root",listDict=[]):#converts List of dictionaries int
         for child in children:  #checks for repition of an object
             if element in child.name:
                 children.append(child)
-                print("repetition")
                 repetition = True
                 break
         if not repetition:      #if not a repetition adds it to a list
@@ -40,7 +46,7 @@ def ListDictToTree(curr = "root",listDict=[]):#converts List of dictionaries int
     return currentNode
 
 
-    x
+    
 def findNodeDict(search = "blerh", listDict = []): #finds node's dictionary in list of dictionaries
     for element in listDict:
         if search in element["name"]:
