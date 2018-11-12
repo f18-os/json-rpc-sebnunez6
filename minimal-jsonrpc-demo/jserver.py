@@ -5,6 +5,7 @@ import socket
 from bsonrpc import JSONRpc
 from bsonrpc import request, service_class
 import json
+from node import *
 from bsonrpc.exceptions import FramingError
 from bsonrpc.framing import (
 	JSONFramingNetstring, JSONFramingNone, JSONFramingRFC7464)
@@ -20,10 +21,10 @@ class ServerServices(object):
         
     @request
     def nop(self, txt):
-        string = json.dumps(txt, indent=4, separators=(". ", " = "))
-        filewriter = open("request.json","w")
-        filewriter.write(string)
-        filewriter.close()
+        root = ListDictToTree("root",txt) #returns it back into a tree
+        increment(root)                   #increments tree
+        root.show()                       #prints results
+        txt = TreeToListDict(root)
         return txt
 
 

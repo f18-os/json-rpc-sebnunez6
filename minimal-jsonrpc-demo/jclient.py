@@ -21,21 +21,22 @@ s.connect(('localhost', 50001))
 rpc = JSONRpc(s,framing_cls=JSONFramingNone)
 server = rpc.get_peer_proxy()
 # Execute in server:
-print("graph before increment")
+print("graph before increment")				#show graph before increment
 root.show()
-dict = listToDict(root)
-print(server.nop(dict))
-
-
-# do this increment remotely:
-increment(root)
-
-print("graph after increment")
+list = TreeToListDict(root)
+print("graph after passing it to the server") #test increment 1 time
+list = server.nop(list)
+print(list)
+root = ListDictToTree("root",list)
 root.show()
-print("dictionary")
-dict = listToDict(root)
-print(server.nop(dict))
-
+print("graph before increment")				#show graph before increment
+root.show()
+list = TreeToListDict(root)
+print("graph after passing it to the server") #test increment 2 time
+list = server.nop(list)
+print(list)
+root = ListDictToTree("root",list)
+root.show()
 
 rpc.close() # Closes the socket 's' also
 

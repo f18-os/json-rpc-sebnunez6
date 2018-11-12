@@ -3,3 +3,8 @@ https://github.com/seprich/py-bson-rpc/blob/master/README.md#quickstart
 
 In case you don’t understand python’s “@” decorator syntax, see
 https://www.python-course.eu/python3_decorators.php
+
+Assumptions:
+Always a root
+tree is never empty there is at least a root
+
